@@ -1,1 +1,20 @@
 <h1>Flights</h1>
+
+<%= form_with url: "/flights/index", method: :get do |form| %>
+	<!--
+  <%= form.label :query, "Search for:" %>
+  <%= form.text_field :query %>
+	-->
+  <%= form.submit "Search" %>
+<% end %>
+
+
+<ul>
+	<% @flights.each do |flight| %>
+		<li>
+		<p><%= Airport.find(flight.departure_airport_id).code %> to
+				<%= Airport.find(flight.arrival_airport_id).code %> </p>
+		<p><%= flight.start %></p>
+		</li>
+	<% end %>
+</ul>
