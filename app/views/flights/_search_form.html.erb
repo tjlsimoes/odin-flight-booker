@@ -1,0 +1,27 @@
+<form action="/flights/index" method="get">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<select name="search[departure_airport_id]">
+    <%= @departure_airports.each do |airport| %>
+      <option value="<%= airport[0] %>"><%= airport[1] %></option>
+    <% end %>
+  </select>
+
+	<select name="search[arrival_airport_id]">
+    <%= @arrival_airports.each do |airport| %>
+      <option value="<%= airport[0] %>"><%= airport[1] %></option>
+    <% end %>
+  </select>
+
+	<select name="search[start]">
+    <%= @starts.each do |start| %>
+      <option value="<%= start %>"><%= start %></option>
+    <% end %>
+  </select>
+
+<select name="search[nbr_passengers]">
+    <%= for x in 1...5 do %>
+      <option value="<%= x %>"><%= x %></option>
+    <% end %>
+  </select>
+	<input type="submit">
+</form>

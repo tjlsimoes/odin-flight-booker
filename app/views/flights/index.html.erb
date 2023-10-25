@@ -1,40 +1,6 @@
 <h1>Flights</h1>
-<!--
-<%= form_with url: "/flights/index", method: :get do |form| %>
 
-  <%= form.label :query, "Search for:" %>
-  <%= form.text_field :query %>
-
-  <%= form.submit "Search" %>
-<% end %>
--->
-<form action="/flights/index" method="get">
-	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-	<select name="search[departure_airport_id]">
-    <%= @departure_airports.each do |airport| %>
-      <option value="<%= airport[0] %>"><%= airport[1] %></option>
-    <% end %>
-  </select>
-
-	<select name="search[arrival_airport_id]">
-    <%= @arrival_airports.each do |airport| %>
-      <option value="<%= airport[0] %>"><%= airport[1] %></option>
-    <% end %>
-  </select>
-
-	<select name="search[start]">
-    <%= @starts.each do |start| %>
-      <option value="<%= start %>"><%= start %></option>
-    <% end %>
-  </select>
-
-<select name="search[nbr_passengers]">
-    <%= for x in 1...5 do %>
-      <option value="<%= x %>"><%= x %></option>
-    <% end %>
-  </select>
-	<input type="submit">
-</form>
+<%= render "search_form" %>
 
 <% unless @flights.nil? %>
 	<ul>
@@ -43,6 +9,9 @@
 			<p><%= Airport.find(flight.departure_airport_id).code %> to
 					<%= Airport.find(flight.arrival_airport_id).code %> </p>
 			<p><%= flight.start %></p>
+      <% unless params[:search].nil? %>
+
+      <% end %>
 			</li>
 		<% end %>
 	</ul>
