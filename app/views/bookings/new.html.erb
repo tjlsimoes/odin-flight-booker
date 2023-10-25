@@ -1,0 +1,20 @@
+<h1>Booking on flight number <%= @booking[:flight_id] %></h1>
+<h2><%= @airports[0][:code] %> to <%= @airports[1][:code] %></h2>
+<h2><%= @flight[:start]%></h2>
+
+<%= form_with model: @booking do |f| %>
+  <% f.hidden_field :nbr_passengers, value: @nbr_passengers %>
+  <% f.hidden_field :flight_id, value: @flight.id %>
+
+  <% for i in 1..@nbr_passengers do %>
+    <%= f.fields_for :passenger, @booking.passengers.build do |subf| %>
+      <%= subf.label :name, "Your name:" %>
+      <%= subf.text_field :name %>
+    <% end %>
+  <% end %>
+
+  <%= f.label :billing_address, "Your billing address" %>
+  <%= f.text_field :billing_address %>
+
+  <%= f.submit %>
+<% end %>
