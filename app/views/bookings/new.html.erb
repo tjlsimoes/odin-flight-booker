@@ -8,13 +8,18 @@
 
   <% for i in 1..@nbr_passengers do %>
     <%= f.fields_for :passenger, @booking.passengers.build do |subf| %>
-      <%= subf.label :name, "Your name:" %>
+      <%= subf.label :name, "Passenger name:" %>
       <%= subf.text_field :name %>
+
+      <%= subf.label :email, "Passenger email:" %>
+      <%= subf.email_field :email %>
+      <br>
     <% end %>
   <% end %>
 
   <%= f.label :billing_address, "Your billing address" %>
   <%= f.text_field :billing_address %>
+  <br>
 
   <%= f.submit %>
 <% end %>
