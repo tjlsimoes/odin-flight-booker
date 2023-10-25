@@ -15,6 +15,7 @@ class FlightsController < ApplicationController
 		@starts = @flights.map {|flight| flight.start}
 		
 		unless params[:search].nil?
+      @nbr_passengers = params[:search][:nbr_passengers]
 			@flights = Flight.restrain(params[:search])
 		end
   end
