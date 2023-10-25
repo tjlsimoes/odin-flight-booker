@@ -1,0 +1,11 @@
+<% unless @flights.nil? %>
+	<ul>
+		<% @flights.each do |flight| %>
+			<li>
+			<p><%= Airport.find(flight.departure_airport_id).code %> to
+					<%= Airport.find(flight.arrival_airport_id).code %> </p>
+			<p><%= flight.start %></p>
+			</li>
+		<% end %>
+	</ul>
+<% end %>
