@@ -10,7 +10,7 @@
         <p><%= Airport.find(flight.departure_airport_id).code %> to
                 <%= Airport.find(flight.arrival_airport_id).code %> </p>
         <p><%= flight.start %></p>
-        <input type="radio" name="selected_flight_id"
+        <input type="radio" name="booking[selected_flight_id]"
                 value="<%= flight.id %>">
         </li>
       <% end %>
