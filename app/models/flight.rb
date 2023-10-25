@@ -4,7 +4,7 @@ class Flight < ApplicationRecord
 
 	def self.restrain(search)
 		if search
-			self.where(start: search[:start].to_datetime).where(
+			self.where(start: search[:start]).where(
 				departure_airport_id: search[:departure_airport_id]).where(
 					arrival_airport_id: search[:arrival_airport_id])
 		else
