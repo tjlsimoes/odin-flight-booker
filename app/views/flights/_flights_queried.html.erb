@@ -1,0 +1,20 @@
+<% unless @flights.nil? %>
+  <form action="/bookings/new" method="get">
+    <input type="hidden" name="authenticity_token"
+            value="<%= form_authenticity_token %>">
+    <input type="hidden" name="booking[nbr_passengers]"
+            value="<%= params[:nbr_passengers] %>">
+    <ul>
+      <% @flights.each do |flight| %>
+        <li>
+        <p><%= Airport.find(flight.departure_airport_id).code %> to
+                <%= Airport.find(flight.arrival_airport_id).code %> </p>
+        <p><%= flight.start %></p>
+        <input type="radio" name="selected_flight_id"
+                value="<%= flight.id %>">
+        </li>
+      <% end %>
+    </ul>
+    <input type="submit">
+  </form>
+<% end %>
