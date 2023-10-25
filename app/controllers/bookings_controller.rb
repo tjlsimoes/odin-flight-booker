@@ -1,11 +1,15 @@
 class BookingsController < ApplicationController
   def new
-    @booking = Booking.new(flight_id: selection_params[:selected_flight_id],
-                nbr_passengers: selection_params[:nbr_passengers])
-    @passengers = []
+    @booking = Booking.new(selection_params)
+    @flight = Flight.find(@booking.flight_id)
+    @airports = [Airport.find(@flight[:departure_airport_id]),
+                  Airport.find(@flight[:arrival_airport_id])]
+    @nbr_passengers = @booking[:nbr_passengers]
     
-    selection_params[:nbr_passengers].times do
-      @passengers << Passenger.new
+    for i in 1..@nbr_passengers do
+      @booking.passengers.build
+    end
+  end
     end
   end
 
