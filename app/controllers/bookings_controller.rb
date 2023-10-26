@@ -17,7 +17,7 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
 
     if @booking.save
-      redirect_to root_path
+      redirect_to booking_path(@booking[:id])
     else
 			@flight = Flight.find(params[:booking][:flight_id])
 			@airports = [Airport.find(@flight[:departure_airport_id]),
@@ -28,7 +28,12 @@ class BookingsController < ApplicationController
   end
 
 	def show
-		Booking.find(params[:id])
+		@booking = Booking.find(params[:id])
+		@flight = Flight.find(@booking[:flight_id])
+		@airports = [Airport.find(@flight[:departure_airport_id]),
+									Airport.find(@flight[:arrival_airport_id])]
+		@passengers = @booking.passengers.map { |passenger| [passenger[:name],
+																													passenger[:email]]}
 	end
 
   private
