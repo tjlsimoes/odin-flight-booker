@@ -2,7 +2,7 @@
   <form action="/bookings/new" method="get">
     <input type="hidden" name="authenticity_token"
             value="<%= form_authenticity_token %>">
-    <input type="hidden" name="booking[nbr_passengers]"
+    <input type="hidden" name="nbr_passengers"
             value="<%= @nbr_passengers %>">
     <ul>
       <% @flights.each do |flight| %>
@@ -10,7 +10,7 @@
         <p><%= Airport.find(flight.departure_airport_id).code %> to
                 <%= Airport.find(flight.arrival_airport_id).code %> </p>
         <p><%= flight.start %></p>
-        <input type="radio" name="booking[flight_id]"
+        <input type="radio" name="flight_id"
                 value="<%= flight.id %>">
         </li>
       <% end %>
