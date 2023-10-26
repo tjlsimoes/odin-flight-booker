@@ -12,7 +12,7 @@ class FlightsController < ApplicationController
         Airport.find(flight.arrival_airport_id).code]
 		end
 
-		@starts = @flights.map {|flight| flight.start}
+		@starts = @flights.map { |flight| flight.start }
 		
 		unless params[:search].nil?
       @nbr_passengers = params[:search][:nbr_passengers]
