@@ -1,0 +1,19 @@
+<h1>Booking on flight number <%= @flight_id %></h1>
+<h2><%= @airports[0][:code] %> to <%= @airports[1][:code] %></h2>
+<h2><%= @flight[:start]%></h2>
+
+<h3><%= pluralize(@booking[:nbr_passengers], "Passenger") %></h3>
+
+<ul>
+	<% i = 0 %>
+	<% while (i < @booking[:nbr_passengers]) %>
+		<li>
+			<p><%= @passengers[i][0]%></p>
+			<p><%= @passengers[i][1]%></p>
+		</li>
+		<% i+= 1; %>
+	<% end %>
+</ul>
+
+<h3>Billing Address</h3>
+<p> <%= @booking[:billing_address] %> </p>
