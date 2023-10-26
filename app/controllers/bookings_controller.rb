@@ -27,6 +27,10 @@ class BookingsController < ApplicationController
     end
   end
 
+	def show
+		Booking.find(params[:id])
+	end
+
   private
   def booking_params
     params.require(:booking).permit(:nbr_passengers,
