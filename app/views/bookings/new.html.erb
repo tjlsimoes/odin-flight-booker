@@ -2,10 +2,11 @@
 <h2><%= @airports[0][:code] %> to <%= @airports[1][:code] %></h2>
 <h2><%= @flight[:start]%></h2>
 
-<%= form_with model: @booking do |f| %>
-  <%= f.hidden_field :nbr_passengers, value: @nbr_passengers %>
+<%= form_with model: @booking, html: {:id => "main_form", :"data-controller" => "passenger"} do |f| %>
+  <%= f.hidden_field :nbr_passengers, value: @nbr_passengers, "data-passenger-target": "nbrPassEl" %>
   <%= f.hidden_field :flight_id, value: @flight.id %>
-
+	
+	<div id="passenger_fields">
 	<%= f.fields_for :passengers do |subf| %>
 		<%= subf.label :name, "Passenger name:" %>
 		<%= subf.text_field :name %>
@@ -14,8 +15,10 @@
 		<%= subf.email_field :email %>
 		<br>
 	<% end %>
-	<br>
-	<button type="button">Add a new passenger</button>
+	</div>
+
+	<br><br>
+	<button data-action="passenger#add" type="button">Add a new passenger</button>
 	<br><br>
   <%= f.label :billing_address, "Your billing address" %>
   <%= f.text_field :billing_address %>
@@ -23,3 +26,26 @@
 
   <%= f.submit %>
 <% end %>
+
+<!--
+<template id="new_passenger">
+	<%= fields_for @booking.passengers.build, options: {:form => "main_form"} do |subf| %>
+		<%= subf.label :name, "Passenger name:" %>
+		<%= subf.text_field :name %>
+
+		<%= subf.label :email, "Passenger email:" %>
+		<%= subf.email_field :email %>
+		<br>
+	<% end %>
+</template>
+-->
+
+<template data-controller="passenger" id="new_passenger">
+	<label data-passenger-target="label" for="booking_passengers_attributes_0_name">Passenger name:</label>
+
+	<input data-passenger-target="name" type="text" name="booking[passengers_attributes][0][name]" id="booking_passengers_attributes_0_name">
+
+	<label data-passenger-target="label" for="booking_passengers_attributes_0_email">Passenger email:</label>
+
+	<input data-passenger-target="email" type="email" name="booking[passengers_attributes][0][email]" id="booking_passengers_attributes_0_email">
+</template>
