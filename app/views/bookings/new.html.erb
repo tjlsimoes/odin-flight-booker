@@ -17,9 +17,10 @@
 		<br>
 	<% end %>
 	</div>
-
 	<br><br>
-	<button data-action="passenger#add" type="button">Add a new passenger</button>
+	<button data-action="passenger#remove" type="button">Remove passenger</button>
+	<br><br>
+	<button data-action="passenger#add" type="button">Add passenger</button>
 	<br><br>
   <%= f.label :billing_address, "Your billing address" %>
   <%= f.text_field :billing_address %>
@@ -42,7 +43,6 @@
 -->
 
 <template data-controller="passenger" id="new_passenger">
-	<br>
 	<label data-passenger-target="label">Passenger name:</label>
 
 	<input data-passenger-target="name" type="text">
@@ -50,5 +50,4 @@
 	<label data-passenger-target="label">Passenger email:</label>
 
 	<input data-passenger-target="email" type="email">
-	<br>
 </template>

@@ -23,8 +23,6 @@ export default class extends Controller {
     const pname_id_attr = `booking_passengers_attributes_${nbr_passengers - 1}_name`;
     const pemail_id_attr = `booking_passengers_attributes_${nbr_passengers - 1}_email`;
 
-    // Strings are different for filling out id value.
-
     this.nameTargets.slice(-1)[0].setAttribute("name", pname_name_attr)
     this.emailTargets.slice(-1)[0].setAttribute("name", pemail_name_attr)
 
@@ -43,5 +41,18 @@ export default class extends Controller {
 
     console.log(this.labelTargets)
 	}
+  }
+
+  remove() {
+    if (this.nbrPassElTarget.value > 1)
+    {
+      --this.nbrPassElTarget.value
+
+      this.nameTargets.slice(-1)[0].remove()
+      this.emailTargets.slice(-1)[0].remove()
+
+      this.labelTargets.slice(-1)[0].remove()
+      this.labelTargets.slice(-1)[0].remove()
+    }
   }
 }
