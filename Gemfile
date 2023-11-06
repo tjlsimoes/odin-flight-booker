@@ -70,3 +70,6 @@ group :test do
   gem "selenium-webdriver"
 
 end
+
+# Add Letter Opener [https://github.com/ryanb/letter_opener]
+gem "letter_opener", group: :development
