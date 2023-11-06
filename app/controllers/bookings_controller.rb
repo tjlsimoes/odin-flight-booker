@@ -17,8 +17,8 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
 
     if @booking.save
-      for i in 1..@booking[:passengers_attributes] do
-        PassengerMailerMailer.with(name: i[:name], emaik: i[:email]).confirmation_email.deliver_later
+      @booking.passengers.each do |pass|
+        PassengerMailer.with(name: pass[:name], email: pass[:email]).confirmation_email.deliver_later
       end
       redirect_to booking_path(@booking[:id])
     else
