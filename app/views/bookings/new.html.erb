@@ -7,6 +7,7 @@
   <%= f.hidden_field :flight_id, value: @flight.id %>
 	
 	<div id="passenger_fields">
+		<br>
 	<%= f.fields_for :passengers do |subf| %>
 		<%= subf.label :name, "Passenger name:" %>
 		<%= subf.text_field :name %>
@@ -41,11 +42,13 @@
 -->
 
 <template data-controller="passenger" id="new_passenger">
-	<label data-passenger-target="label" for="booking_passengers_attributes_0_name">Passenger name:</label>
+	<br>
+	<label data-passenger-target="label">Passenger name:</label>
 
-	<input data-passenger-target="name" type="text" name="booking[passengers_attributes][0][name]" id="booking_passengers_attributes_0_name">
+	<input data-passenger-target="name" type="text">
 
-	<label data-passenger-target="label" for="booking_passengers_attributes_0_email">Passenger email:</label>
+	<label data-passenger-target="label">Passenger email:</label>
 
-	<input data-passenger-target="email" type="email" name="booking[passengers_attributes][0][email]" id="booking_passengers_attributes_0_email">
+	<input data-passenger-target="email" type="email">
+	<br>
 </template>
