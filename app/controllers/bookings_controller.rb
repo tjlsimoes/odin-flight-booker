@@ -5,7 +5,7 @@ class BookingsController < ApplicationController
 			@flight = Flight.find(params[:flight_id])
 			@airports = [Airport.find(@flight[:departure_airport_id]),
 										Airport.find(@flight[:arrival_airport_id])]
-			
+
 		end
 		@nbr_passengers = params[:nbr_passengers].to_i
 		for i in 1..@nbr_passengers do
@@ -17,6 +17,9 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
 
     if @booking.save
+      for i in 1..@booking[:passengers_attributes] do
+        PassengerMailerMailer.with(name: i[:name], emaik: i[:email]).confirmation_email.deliver_later
+      end
       redirect_to booking_path(@booking[:id])
     else
 			@flight = Flight.find(params[:booking][:flight_id])
